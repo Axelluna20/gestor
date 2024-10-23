@@ -52,7 +52,7 @@
 /* Establece el fondo, color y fuentes generales del cuerpo */
 body {
     background: url(../images/bg-body.png) repeat; /* Fondo del cuerpo */
-    color: #000000; /* Color del texto */
+    color: #ffffff; /* Color del texto */
     font-family: Arial, Helvetica, sans-serif; /* Fuente general */
     font-size: 14px; /* Tamaño de fuente */
     margin: 0; /* Elimina márgenes */
@@ -110,7 +110,7 @@ body {
 
 /* Estilo para el enlace activo al pasar el mouse */
 #navigation li.current a:hover {
-    color: #02164d; /* Color del texto al hover */
+    color: #fdfeff; /* Color del texto al hover */
 }
 
 /* Estilo para enlaces de navegación al pasar el mouse */
@@ -145,17 +145,52 @@ body div form input[type="submit"] {
     border: 1px solid #ccc; /* Borde gris claro */
 }
 
-/* Estilo de los botones del formulario */
-body div form input[type="submit"] {
-    background-color: #02164d; /* Color de fondo */
-    color: white; /* Color del texto */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    text-align: center;
-}
-
 /* Estilo del encabezado del formulario */
 body div form h2 {
     font-size: 24px; /* Tamaño del texto del encabezado */
     margin-bottom: 20px; /* Espaciado inferior */
     white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
 }
+
+/* Estilo de las tablas */
+table {
+    width: 100%; /* Ancho completo de la tabla */
+    border-collapse: collapse; /* Colapsa bordes para evitar espacios entre celdas */
+    margin-top: 20px; /* Agrega espacio en la parte superior de la tabla */
+}
+
+/* Estilo para las celdas de la tabla */
+th, td {
+    padding: 10px; /* Agrega espacio interno a las celdas */
+    border: 1px solid #ccc; /* Establece un borde suave alrededor de las celdas */
+    text-align: left; /* Alinea el texto a la izquierda */
+    color: white;
+}
+
+/* Estilo para las cabeceras de la tabla */
+th {
+    color: black;
+    background-color: #f2f2f2; /* Color de fondo de la cabecera */
+}
+
+/* Estilo para resaltar la fila al pasar el mouse */
+tr:hover {
+    background-color: rgba(255,255,255,0.3); /* Color de fondo al pasar el mouse sobre la fila */
+}
+
+a {
+    color: #f5f6f8; /* Color de los enlaces */
+    text-decoration: none; /* Sin subrayado en los enlaces */
+}
+
+a:hover {
+    text-decoration: underline; /* Subrayar al pasar el ratón sobre el enlace */
+}
+
+
+/* Estilo del pie de página */
+#footer {
+    margin-top: 20px; /* Agrega espacio en la parte superior del pie de página */
+    text-align: center; /* Centra el contenido del pie de página */
+}
+
