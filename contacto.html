@@ -90,22 +90,22 @@
                             </li>
                         </ul>
                     </div>
-                    <form action="contacto.html">
+                    <form action="conexionCon.php" method="POST">
                         <h3>REGISTRO DE NUEVO CONTACTO</h3>
                         <label for="NOMBRE">NOMBRE:
-                            <input type="text" id="NOMBRE">
+                            <input type="text" id="NOMBRE" name="nombre" required>
                         </label>
 
-                        <label for="CORREO">CORREO ELECTRONICO
-                            <input type="email" id="CORREO">
+                        <label for="CORREO">CORREO ELECTRONICO:
+                            <input type="email" id="CORREO" name="correo" required>
                         </label>
 
-                        <label for="NUMERO">NUMERO DE CONTACTO
-                            <input type="tel" id="NUMERO">
+                        <label for="NUMERO">NUMERO DE CONTACTO:
+                            <input type="tel" id="NUMERO" name="numero" required>
                         </label>
 
                         <label for="DIRECCION">DIRECCION FISICA:</label>
-                        <textarea id="DIRECCION" class="auto-adjust" oninput="autoResize(this)"></textarea>
+                        <textarea id="DIRECCION" name="direccion" class="auto-adjust" required></textarea>
 
                         <input type="submit" class="send" value="GUARDAR CONTACTO">
                     </form>
