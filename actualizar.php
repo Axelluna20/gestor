@@ -1,57 +1,99 @@
 <?php
-include 'conexionVM.php';  // Incluir la conexión a la base de datos
+// Conexión a la base de datos
+$conexion = new mysqli("localhost", "root", "", "gestor");
 
+// Verificar la conexión
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
+}
+
+// Inicializar variables
+$id = $nombre = $empresa = $producto = "";
+$actualizado = false; // Variable para verificar si se actualizó correctamente
+
+// Verificar si se ha enviado el ID por GET
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    // Consulta para obtener los datos del prospecto
+    $sql = "SELECT nombre, empresa, producto FROM nuevo_prospecto WHERE ID_Prospecto=?";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->bind_result($nombre, $empresa, $producto);
+    
+    // Obtener el resultado
+    if (!$stmt->fetch()) {
+        echo "No se encontró el registro con el ID: $id";
+        exit();
+    }
+
+    // Cerrar la declaración
+    $stmt->close();
+}
+
+// Verificar si se ha enviado el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = $_POST['id'];
+    // Obtener datos del formulario
     $nombre = $_POST['nombre'];
     $empresa = $_POST['empresa'];
     $producto = $_POST['producto'];
 
-    // Actualizar el prospecto en la base de datos
-    $sql = "UPDATE nuevo_prospecto SET nombre='$nombre', empresa='$empresa', producto='$producto' WHERE ID_Prospecto=$id";
+    // Consulta para actualizar los datos en la tabla nuevo_prospecto
+    $sql = "UPDATE nuevo_prospecto SET nombre=?, empresa=?, producto=? WHERE ID_Prospecto=?";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bind_param("sssi", $nombre, $empresa, $producto, $id);
 
-    if ($conn->query($sql) === TRUE) {
-        // Si la actualización es exitosa, mostrar el mensaje y el botón
-        echo "<h3 style='color: #02164d;'>Registro actualizado correctamente.</h3>"; // Cambia el color del mensaje aquí
-        echo "<a href='ventas mensuales.php'><button style='background-color: #02164d; color: white;'>Regresar a Ventas Mensuales</button></a>";
+    // Ejecutar la consulta
+    if ($stmt->execute()) {
+        $actualizado = true; // Marcar como actualizado
     } else {
-        echo "<p style='color: red;'>Error actualizando el registro: " . $conn->error . "</p>"; // Mensaje de error
+        echo "Error al actualizar el registro: " . $stmt->error;
     }
-} else {
-    $id = $_GET['id'];  // Obtener el ID del prospecto
-    $sql = "SELECT * FROM nuevo_prospecto WHERE ID_Prospecto=$id";
-    $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
+
+    // Cerrar la declaración y la conexión
+    $stmt->close();
+    $conexion->close();
+}
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actualizar Prospecto</title>
     <link rel="stylesheet" type="text/css" href="css/actualizar.css">
+    <script>
+        // Función para mostrar la alerta y redirigir
+        function mostrarAlerta() {
+            alert("Registro actualizado correctamente.");
+            window.location.href = "ventas mensuales.php"; // Redirigir a ventas_mensuales.php
+        }
+    </script>
 </head>
 <body>
-<h1 style="color: white; text-align: center;">Actualizar Prospecto</h1> <!-- Cambia el color del encabezado aquí -->
+    <h1 style="color: white; text-align: center;">Actualizar Prospecto</h1>
     <div>
         <form method="POST" action="actualizar.php">
-            <input type="hidden" name="id" value="<?php echo $row['ID_Prospecto']; ?>">
-            <label for="nombre" style="color: #02164d;">Nombre:</label> <!-- Cambia el color del texto aquí -->
-            <input type="text" name="nombre" value="<?php echo $row['nombre']; ?>" required>
+            <input type="hidden" name="id" value="<?php echo $id; ?>"> <!-- Cambiado aquí -->
+            <label for="nombre" style="color: #02164d;">Nombre:</label>
+            <input type="text" name="nombre" value="<?php echo htmlspecialchars($nombre); ?>" required> <!-- Cambiado aquí -->
             <br>
-            <label for="empresa" style="color: #02164d;">Empresa:</label> <!-- Cambia el color del texto aquí -->
-            <input type="text" name="empresa" value="<?php echo $row['empresa']; ?>" required>
+            <label for="empresa" style="color: #02164d;">Empresa:</label>
+            <input type="text" name="empresa" value="<?php echo htmlspecialchars($empresa); ?>" required> <!-- Cambiado aquí -->
             <br>
-            <label for="producto" style="color: #02164d;">Producto:</label> <!-- Cambia el color del texto aquí -->
-            <input type="text" name="producto" value="<?php echo $row['producto']; ?>" required>
+            <label for="producto" style="color: #02164d;">Producto:</label>
+            <input type="text" name="producto" value="<?php echo htmlspecialchars($producto); ?>" required> <!-- Cambiado aquí -->
             <br>
+
             <input type="submit" value="Actualizar">
         </form>
+    <?php if ($actualizado): ?>
+        <script>
+            mostrarAlerta(); // Llamar a la función para mostrar la alerta
+        </script>
+    <?php endif; ?>
     </div>
 </body>
 </html>
-
-<?php
-}
-$conn->close();  // Cerrar la conexión a la base de datos al final
-?>

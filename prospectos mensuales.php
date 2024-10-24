@@ -11,10 +11,9 @@ if (!isset($_SESSION['usuario'])) {
     header("Location: login.html");
     exit();
 }
+include 'conexionNP.php';  // Incluir la conexión a la base de datos
 
-include 'conexionVM.php';  // Incluir la conexión a la base de datos
-
-// Obtener todos los prospectos
+// Obtener todos los prospectos del mes actual
 $sql = "SELECT * FROM nuevo_prospecto";
 $result = $conn->query($sql);
 
@@ -24,11 +23,11 @@ if ($result === false) {
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Prospectos Mensuales</title>
-    <link rel="stylesheet" type="text/css" href="css/ventas mensuales.css">
+    <link rel="stylesheet" type="text/css" href="css/prosp mensual.css">
 </head>
 <body>
     <div id="header">
@@ -41,10 +40,10 @@ if ($result === false) {
                 <li>
                     <a href="nuevos prosp.php" class="link2">Registrar Nuevo Prospecto</a>
                 </li>
-                <li class="current">
+                <li>
                     <a href="ventas mensuales.php" class="link1">Ventas Mensuales</a>
                 </li>
-                <li>
+                <li class="current">
                     <a href="prospectos mensuales.php" class="link2">Prospectos Mensuales</a>
                 </li>
                 <li>
@@ -57,16 +56,23 @@ if ($result === false) {
         </div>
 
         <div id="content">
-            <h1>Historial De Venta</h1>
+            <h1>Lista de Prospectos del Mes</h1>
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>ID_Prospecto</th>
                         <th>Nombre</th>
                         <th>Empresa</th>
                         <th>Producto</th>
-                        <th>Acciones</th>
-                    </tr>
+                        <th>Características</th>
+                        <th>Proveedor</th>
+                        <th>Correo</th>
+                        <th>Vendedor</th>
+                        <th>Número</th>
+                        <th>Dirección</th>
+                        <th>RFC</th>
+                        <th>Acciones</th> <!-- Columna para acciones -->
+                    </tr> 
                 </thead>
                 <tbody>
                     <?php
@@ -77,14 +83,24 @@ if ($result === false) {
                             echo "<td>" . $row["nombre"] . "</td>";
                             echo "<td>" . $row["empresa"] . "</td>";
                             echo "<td>" . $row["producto"] . "</td>";
+                            echo "<td>" . $row["caracteristicas"] . "</td>";
+                            echo "<td>" . $row["proveedor"] . "</td>";
+                            echo "<td>" . $row["correo"] . "</td>";
+                            echo "<td>" . $row["vendedor"] . "</td>"; // Corregido para mostrar el vendedor
+                            echo "<td>" . $row["numero"] . "</td>";
+                            echo "<td>" . $row["direccion"] . "</td>";
+                            echo "<td>" . $row["constancia"] . "</td>";
                             echo "<td>
-                                <a href='actualizar.php?id=" . $row["ID_Prospecto"] . "'>Actualizar</a> | 
-                                <a href='borrar.php?id=" . $row["ID_Prospecto"] . "'>Borrar</a>
-                              </td>";
+                                    <a href='edit prosp.php?id=" . $row["ID_Prospecto"] . "'>Editar</a> | 
+                                    <form action='borrar.php' method='post' style='display:inline;'>
+                                        <input type='hidden' name='id' value='" . $row["ID_Prospecto"] . "'>
+                                        <button type='submit' onclick='return confirm(\"¿Está seguro de que desea borrar este prospecto?\");'>Borrar</button>
+                                    </form>
+                                  </td>";
                             echo "</tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='5'>No hay prospectos disponibles.</td></tr>";
+                        echo "<tr><td colspan='12'>No hay prospectos disponibles para este mes.</td></tr>";
                     }
                     ?>
                 </tbody>
@@ -93,10 +109,10 @@ if ($result === false) {
     </div>
 
     <div id="footer">
-        <b href="http://freewebsitetemplates.com/go/facebook/" id="facebook" target="_blank">Facebook</b>
-        <b href="http://freewebsitetemplates.com/go/twitter/" id="tiktok" target="_blank">Twitter</b>
-        <b href="http://freewebsitetemplates.com/go/googleplus/" id="instagram" target="_blank">Google&#43;</b>
-        <b href="https://www.handwaremarket.com/" id="handware" target="_blank">Handware Market</b>
+        <b><a href="http://freewebsitetemplates.com/go/facebook/" target="_blank">Facebook</a></b>
+        <b><a href="http://freewebsitetemplates.com/go/twitter/" target="_blank">Twitter</a></b>
+        <b><a href="http://freewebsitetemplates.com/go/googleplus/" target="_blank">Google+</a></b>
+        <b><a href="https://www.handwaremarket.com/" target="_blank">Handware Market</a></b>
     </div>
 </body>
 </html>

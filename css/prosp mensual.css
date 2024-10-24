@@ -3,9 +3,9 @@
     font-family: 'ultraregular';
     src: url('../fonts/ultra-webfont.eot'); /* Archivo .eot para IE */
     src: url('../fonts/ultra-webfont.eot?#iefix') format('embedded-opentype'), /* Soporte para IE */
-    url('../fonts/ultra-webfont.woff') format('woff'), /* Archivo .woff */
-    url('../fonts/ultra-webfont.ttf') format('truetype'), /* Archivo .ttf */
-    url('../fonts/ultra-webfont.svg#ultraregular') format('svg'); /* Archivo .svg */
+         url('../fonts/ultra-webfont.woff') format('woff'), /* Archivo .woff */
+         url('../fonts/ultra-webfont.ttf') format('truetype'), /* Archivo .ttf */
+         url('../fonts/ultra-webfont.svg#ultraregular') format('svg'); /* Archivo .svg */
     font-weight: normal; /* Peso normal */
     font-style: normal; /* Estilo normal */
 }
@@ -15,9 +15,9 @@
     font-family: 'arvobold';
     src: url('../fonts/arvo-bold-webfont.eot');
     src: url('../fonts/arvo-bold-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/arvo-bold-webfont.woff') format('woff'),
-    url('../fonts/arvo-bold-webfont.ttf') format('truetype'),
-    url('../fonts/arvo-bold-webfont.svg#arvobold') format('svg');
+         url('../fonts/arvo-bold-webfont.woff') format('woff'),
+         url('../fonts/arvo-bold-webfont.ttf') format('truetype'),
+         url('../fonts/arvo-bold-webfont.svg#arvobold') format('svg');
     font-weight: normal; /* Peso normal */
     font-style: normal; /* Estilo normal */
 }
@@ -27,9 +27,9 @@
     font-family: 'arvoregular';
     src: url('../fonts/arvo-regular-webfont.eot');
     src: url('../fonts/arvo-regular-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/arvo-regular-webfont.woff') format('woff'),
-    url('../fonts/arvo-regular-webfont.ttf') format('truetype'),
-    url('../fonts/arvo-regular-webfont.svg#arvoregular') format('svg');
+         url('../fonts/arvo-regular-webfont.woff') format('woff'),
+         url('../fonts/arvo-regular-webfont.ttf') format('truetype'),
+         url('../fonts/arvo-regular-webfont.svg#arvoregular') format('svg');
     font-weight: normal; /* Peso normal */
     font-style: normal; /* Estilo normal */
 }
@@ -118,78 +118,43 @@ body {
     color: #fff799; /* Color al hover */
 }
 
-/* Estilo del formulario de nuevos prospectos */
-body div form {
-    background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco con algo de transparencia */
-    width: 500px; /* Ancho fijo del contenedor */
-    margin: 20px auto; /* Centrar el formulario */
-    padding: 75px; /* Espaciado interno del contenedor */
-    border-radius: 50px; /* Bordes redondeados */
-    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5); /* Sombra alrededor del contenedor */
-    text-align: center;
-    display: flex; /* Usar flexbox para alinear elementos */
-    flex-direction: column; /* Disposición en columna */
-    align-items: center; /* Centrar horizontalmente */
-}
-
-/* Estilo de los campos de entrada */
-body div form input[type="text"],
-body div form input[type="email"],
-body div form input[type="tel"],
-body div form input[type="submit"] {
-    width: 100%; /* Ancho completo */
-    max-width: 400px; /* Ancho máximo */
-    padding: 10px; /* Relleno interno */
-    margin: 10px 0; /* Margen superior e inferior */
-    border-radius: 5px; /* Bordes redondeados */
-    border: 1px solid #ccc; /* Borde gris claro */
-}
-
-/* Estilo del encabezado del formulario */
-body div form h2 {
-    font-size: 24px; /* Tamaño del texto del encabezado */
-    margin-bottom: 20px; /* Espaciado inferior */
-    white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
-}
-
-/* Estilo de las tablas */
+/* Estilos para la tabla de prospectos */
 table {
-    width: 100%; /* Ancho completo de la tabla */
-    border-collapse: collapse; /* Colapsa bordes para evitar espacios entre celdas */
-    margin-top: 20px; /* Agrega espacio en la parte superior de la tabla */
+    width: 100%; /* Ancho completo */
+    border-collapse: collapse; /* Colapsar bordes */
+    margin-top: 20px; /* Margen superior */
 }
 
-/* Estilo para las celdas de la tabla */
 th, td {
-    padding: 10px; /* Agrega espacio interno a las celdas */
-    border: 1px solid #ccc; /* Establece un borde suave alrededor de las celdas */
-    text-align: left; /* Alinea el texto a la izquierda */
-    color: white;
+    border: 1px solid #d1d3d4; /* Borde de celdas */
+    padding: 10px; /* Relleno interno */
+    text-align: left; /* Alinear texto a la izquierda */
 }
 
-/* Estilo para las cabeceras de la tabla */
 th {
-    color: black;
-    background-color: #f2f2f2; /* Color de fondo de la cabecera */
+    background-color: #02164d; /* Fondo de encabezados */
+    color: #ffffff; /* Color de texto de encabezados */
 }
 
+tbody tr:nth-child(even) {
+    background-color: #001f64; /* Fondo alternativo para filas */
+}
+
+tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.3) ; /* Fondo al pasar el mouse sobre filas */
+    color: #ffffff; /* Color de texto al hover */
+}
+
+/* Estilo de los enlaces en la tabla */
+table a {
+    color: #d1d3d4; /* Color de los enlaces */
+    text-decoration: none; /* Sin subrayado */
+}
+
+table a:hover {
+    color: #fff799; /* Color al hover */
+}
 /* Estilo para resaltar la fila al pasar el mouse */
 tr:hover {
-    background-color: rgba(255,255,255,0.3); /* Color de fondo al pasar el mouse sobre la fila */
-}
-
-a {
-    color: #f5f6f8; /* Color de los enlaces */
-    text-decoration: none; /* Sin subrayado en los enlaces */
-}
-
-a:hover {
-    text-decoration: underline; /* Subrayar al pasar el ratón sobre el enlace */
-}
-
-
-/* Estilo del pie de página */
-#footer {
-    margin-top: 20px; /* Agrega espacio en la parte superior del pie de página */
-    text-align: center; /* Centra el contenido del pie de página */
+    background-color: rgba(255, 0, 0, 0.3); /* Color de fondo al pasar el mouse sobre la fila */
 }

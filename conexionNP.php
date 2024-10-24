@@ -27,18 +27,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $producto = $_POST['producto'];
     $caracteristicas = $_POST['caracteristicas'];
     $proveedor = $_POST['proveedor'];
+    $correo = $_POST['correo']; // Capturar correo
+    $vendedor = $_POST['vendedor']; // Capturar vendedor
     $numero = $_POST['numero'];
     $direccion = $_POST['direccion'];
     $constancia = $_POST['constancia']; // Opcional
 
     // Consulta para registrar el prospecto
-    $sql = "INSERT INTO nuevo_prospecto (nombre, empresa, producto, caracteristicas, proveedor, numero, direccion, constancia) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO nuevo_prospecto (nombre, empresa, producto, caracteristicas, proveedor, correo, vendedor, numero, direccion, constancia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     
     // Verifica que la preparación de la consulta fue exitosa
     if ($stmt) {
         // Vincular parámetros
-        $stmt->bind_param("ssssssss", $nombre, $empresa, $producto, $caracteristicas, $proveedor, $numero, $direccion, $constancia);
+        $stmt->bind_param("ssssssssss", $nombre, $empresa, $producto, $caracteristicas, $proveedor, $correo, $vendedor, $numero, $direccion, $constancia);
         
         // Ejecutar la consulta
         if ($stmt->execute()) {

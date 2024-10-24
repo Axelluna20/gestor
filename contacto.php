@@ -1,3 +1,15 @@
+<?php
+session_start();
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
+header("Pragma: no-cache"); // HTTP 1.0
+header("Expires: 0"); // Proxies
+
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.html");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +46,7 @@
 </head>
 <body>
     <div id="header">
-        <a href="index.html"><img src="images/Grupo_Almatodo_sin_fondo.png" width="150" alt="Logo"></a>
+        <a><img src="images/Grupo_Almatodo_sin_fondo.png" width="150" alt="Logo"></a>
     </div>
 
     <!-- Menú de navegación -->
@@ -43,16 +55,16 @@
             <a href="nuevos prosp.php" class="link2">Registrar Nuevo Prospecto</a>
         </li>
         <li class="current">
-            <a href="ventas mensuales.php" class="link1">Registro De Ventas Mensuales</a>
+            <a href="ventas mensuales.php" class="link1">Ventas Mensuales</a>
         </li>
         <li>
-            <a href="prospectos mensuales.html" class="link2">Prospectos Mensuales</a>
+            <a href="prospectos mensuales.php" class="link2">Prospectos Mensuales</a>
         </li>
         <li>
-            <a href="contacto.html" class="link1">Contactos</a>
+            <a href="contacto.php" class="link1">Contactos</a>
         </li>
         <li>
-            <a href="login.html" class="link2">Cerrar Sesión</a>
+            <a href="logout.php" class="link2">Cerrar Sesión</a>
         </li>
     </ul>
 
@@ -120,7 +132,7 @@
                 <a href="https://www.facebook.com/HandwareMarket?mibextid=ZbWKwL" id="facebook" target="_blank">Facebook</a>
                 <a href="https://www.tiktok.com/@handwaremarket?_t=8qDHt5Iai74&_r=1" id="tik tok" target="_blank">Tik tok</a>
                 <a href="https://www.instagram.com/handwaremarket?igsh=Zzk5ZWxydGExOGJz" id="instagram" target="_blank">instagram&#43;</a>
-                <a href="https://www.handwaremarket.com/" id="handware" target="_blank">handwaremarket</a>
+                <a href="https://www.handwaremarket.com/" id="handware" target="_blank">Handware Market</a>
             </div>
         </div>
         <p>

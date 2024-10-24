@@ -1,16 +1,15 @@
 <?php
 session_start();
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
+header("Pragma: no-cache"); // HTTP 1.0
+header("Expires: 0"); // Proxies
 
-header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
-header("Pragma: no-cache"); // HTTP 1.0.
-header("Expires: 0"); // Proxies.
-
-// Verificar si el usuario ha iniciado sesión
 if (!isset($_SESSION['usuario'])) {
     header("Location: login.html");
     exit();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -22,7 +21,7 @@ if (!isset($_SESSION['usuario'])) {
 <body>
 
 <div id="header">
-    <a href="index.html"><img src="images/Grupo_Almatodo_sin_fondo.png" width="150" alt="Logo"></a>
+    <a><img src="images/Grupo_Almatodo_sin_fondo.png" width="150" alt="Logo"></a>
 
     <ul id="navigation">
         <li class="current">
@@ -32,13 +31,13 @@ if (!isset($_SESSION['usuario'])) {
             <a href="ventas mensuales.php" class="link1">Ventas Mensuales</a>
         </li>
         <li>
-            <a href="prospectos mensuales.html" class="link2">Prospectos Mensuales</a>
+            <a href="prospectos mensuales.php" class="link2">Prospectos Mensuales</a>
         </li>
         <li>
-            <a href="contacto.html" class="link1">Contactos</a>
+            <a href="contacto.php" class="link1">Contactos</a>
         </li>
         <li>
-            <a href="login.html" class="link2">Cerrar Sesión</a>
+            <a href="logout.php" class="link2">Cerrar Sesión</a>
         </li>
     </ul>
 </div>
@@ -67,8 +66,12 @@ if (!isset($_SESSION['usuario'])) {
                 <input type="text" id="proveedor" name="proveedor" required>
             </label><br>
 
+            <label for="VENDEDOR">VENDEDOR ENCARGADO:
+                <input type="text" id="vencedor" name="vendedor">
+            </label><br>
+
             <label for="CORREO">CORREO ELECTRONICO:
-                <input type="email" id="correo" name="correo">
+                <input type="text" id="correo" name="correo">
             </label><br>
 
             <label for="NUMERO">NUMERO DE CONTACTO:
@@ -76,16 +79,13 @@ if (!isset($_SESSION['usuario'])) {
             </label><br>
 
             <label for="DIRECCION">DIRECCION FISICA:</label>
-            <textarea id="DIRECCION" name="direccion" class="auto-adjust" oninput="autoResize(this)" required></textarea><br>
+            <textarea id="direciion" name="direccion" class="auto-adjust" oninput="autoResize(this)" required></textarea><br>
 
-            <label for="CONSTANCIA FISCAL">CONSTANCIA FISCAL:
+            <label for="RFC">RFC:
                 <input type="text" id="constancia" name="constancia">
             </label><br>
 
             <input type="submit" value="Registrar Nuevo Prospecto">
-            <input type="submit" class="EDITAR" value="EDITAR PROSPECTO">
-            <input type="submit" class="ACTUALIZAR" value="ACTUALIZAR PROSPECTO">
-            <input type="submit" class="ELIMINAR" value="ELIMINAR PROSPECTO">
         </form>
     </div>
 </div>
@@ -97,7 +97,7 @@ if (!isset($_SESSION['usuario'])) {
             <a href="http://freewebsitetemplates.com/go/facebook/" id="facebook" target="_blank">Facebook</a>
             <a href="http://freewebsitetemplates.com/go/twitter/" id="twitter" target="_blank">Twitter</a>
             <a href="http://freewebsitetemplates.com/go/googleplus/" id="instagram" target="_blank">Google+</a>
-            <a href="https://www.handwaremarket.com/" id="handware" target="_blank">handwaremarket</a>
+            <a href="https://www.handwaremarket.com/" id="handware" target="_blank">Handware Market</a>
         </div>
     </div>
     <p>&copy; Copyright 2023. All rights reserved.</p>
